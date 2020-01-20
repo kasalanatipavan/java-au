@@ -1,0 +1,41 @@
+import java.io.*;  
+import java.util.*; 
+class Serial{  
+ public static void main(String args[]){  
+  try{  
+  Scanner sc = new Scanner(System.in);   
+  int i=0;
+  while(i==0) {
+  System.out.println("write or read or exit");
+  String input=sc.nextLine();
+  
+  if(input=="write") {
+  System.out.println("Enter id");
+  int id=sc.nextInt();
+  System.out.println("Enter name");
+  String name=sc.nextLine();
+  
+  FileOutputStream fout=new FileOutputStream("f.txt");  
+  ObjectOutputStream out=new ObjectOutputStream(fout);  
+  out.writeObject(new Employee(id,name));  
+  out.flush();  
+  out.close();  
+  System.out.println("success");
+  }
+  
+  else if(input=="read") {
+  ObjectInputStream in=new ObjectInputStream(new FileInputStream("f.txt"));  
+  Employee e=(Employee)in.readObject();  
+  
+  System.out.println(e.id+" "+e.name);  
+ 
+  in.close();  
+  }
+  
+  else {
+	  i=1;
+  }
+  }
+  }catch(Exception e){System.out.println(e);}  
+ }  
+}  

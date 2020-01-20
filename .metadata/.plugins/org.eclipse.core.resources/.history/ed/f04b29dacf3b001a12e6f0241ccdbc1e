@@ -1,0 +1,27 @@
+import java.io.*;  
+class Serial{  
+ public static void main(String args[]){  
+  try{  
+  
+  Employee e1 =new Employee(888,"Pavan");  
+  
+  
+  FileOutputStream fout=new FileOutputStream("f.txt");  
+  ObjectOutputStream out=new ObjectOutputStream(fout);  
+  out.writeObject(e1);  
+  out.flush();  
+
+  
+  out.close();  
+  System.out.println("success");  
+  
+  
+  ObjectInputStream in=new ObjectInputStream(new FileInputStream("f.txt"));  
+  Employee e=(Employee)in.readObject();  
+  
+  System.out.println(e.id+" "+e.name);  
+ 
+  in.close();  
+  }catch(Exception e){System.out.println(e);}  
+ }  
+}  
